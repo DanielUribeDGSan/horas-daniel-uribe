@@ -8,8 +8,10 @@ var taskRef = db.collection('col-sala').doc('horas-uribe').collection('tareas');
       const project = doc.data().project;
       const task = doc.data().task;
       const time = parseFloat(doc.data().time);
+      const month = doc.data().month;
+      const dateTime = doc.data().dateTime;
 
-      dataSet.push([project, task, time.toFixed(2)]);
+      dataSet.push([project, task, time.toFixed(2), month, dateTime]);
 
       // Sumar las horas al total
       totalHours += time;
@@ -159,6 +161,12 @@ const dataTable = (id, dataSet, total) => {
       },
       {
         title: 'Horas y minutos',
+      },
+      {
+        title: 'Mes',
+      },
+      {
+        title: 'Fecha',
       },
     ],
   });

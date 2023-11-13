@@ -46,6 +46,8 @@ const addTask = () => {
   const projectSelect = document.querySelector('#projectSelect');
   const task = document.querySelector('#task');
   const time = document.querySelector('#time');
+  const currentDate = new Date();
+  const taskDate = currentDate.toISOString();
 
   if (!projectSelect.value || !task.value || !time.value) {
     Swal.fire({
@@ -66,12 +68,13 @@ const addTask = () => {
       time: parseFloat(time.value),
       month,
       year,
+      dateTime: taskDate,
     })
     .then(() => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Proyecto registrado',
+        title: 'Tarea registrada',
         showConfirmButton: false,
         timer: 1500,
       });
