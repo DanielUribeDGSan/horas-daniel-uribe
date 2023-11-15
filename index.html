@@ -96,6 +96,15 @@
               <span class="nav-link-text ms-1">Registrar horas</span>
             </a>
           </li>
+          <li class="nav-item">
+            <button class="nav-link btn-logout" onclick="logOut()">
+              <div
+                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Cerrar sesión</span>
+            </button>
+          </li>
         </ul>
       </div>
     </aside>
@@ -360,6 +369,7 @@
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-messaging.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
@@ -377,6 +387,8 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
     <script src="./assets/js/conexion.js?v=2.0.6"></script>
+    <script src="./assets/js//forms/utils.js"></script>
+    <script src="./assets/js/auth/validateNotSesion.js"></script>
     <script src="./assets/js/data/showCols.js?v=2.0.6"></script>
     <script src="./assets/js/data/showDataTable.js?v=2.0.6"></script>
 

@@ -49,7 +49,7 @@ const addTask = () => {
   const currentDate = new Date();
   const taskDate = currentDate.toISOString();
 
-  if (!projectSelect.value || !task.value || !time.value) {
+  if (!projectSelect.value || !task.value || !time.value || time.value === 0) {
     Swal.fire({
       title: 'Campos vacíos',
       text: 'Los campos son obligatorios',

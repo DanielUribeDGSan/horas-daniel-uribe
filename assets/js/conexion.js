@@ -9,3 +9,16 @@ firebase.initializeApp({
 });
 //Inicializar firebase
 var db = firebase.firestore();
+
+// // Conexión ironbit
+// firebase.initializeApp({
+//   apiKey: 'AIzaSyDsXHfwXWraIydftFFIvYNVna0S_IySu-8',
+//   authDomain: 'babel-webs.firebaseapp.com',
+//   projectId: 'babel-webs',
+//   storageBucket: 'babel-webs.appspot.com',
+//   messagingSenderId: '755224656481',
+//   appId: '1:755224656481:web:b962e938149dbc1bcf4820',
+//   measurementId: 'G-4H9CB52VXY',
+// });
+// //Inicializar firebase
+// var db = firebase.firestore();

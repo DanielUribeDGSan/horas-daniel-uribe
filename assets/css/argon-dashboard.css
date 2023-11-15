@@ -1,4 +1,4 @@
-/*!
+/* 
  * Bootstrap v5.2.0-beta1 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
  * Copyright 2011-2022 Twitter, Inc.
@@ -26935,3 +26935,20 @@ pre[class*="language-"] {
 
 /*# sourceMappingURL=dashboard-free.css.map */
 
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.btn-logout{
+  border: none;
+  background: #fff;
+  width: 100%;
+}
