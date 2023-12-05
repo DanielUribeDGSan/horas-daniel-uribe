@@ -1,76 +1,84 @@
-var taskRef = db.collection('col-sala').doc('horas-uribe').collection('tareas');
+var taskRef = db.collection("col-sala").doc("horas-uribe").collection("tareas");
 (async () => {
   var dataSet = new Array();
   var totalHours = 0; // Variable para almacenar el total de horas
 
-  await taskRef.get().then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-      const project = doc.data().project;
-      const task = doc.data().task;
-      const time = parseFloat(doc.data().time);
-      const month = doc.data().month;
-      const dateTime = doc.data().dateTime;
+  await taskRef
+    .where("month", "==", 12)
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        const project = doc.data().project;
+        const task = doc.data().task;
+        const time = parseFloat(doc.data().time);
+        const month = doc.data().month;
+        const dateTime = doc.data().dateTime;
 
-      dataSet.push([project, task, time.toFixed(2), month, dateTime]);
+        dataSet.push([project, task, time.toFixed(2), month, dateTime]);
 
-      // Sumar las horas al total
-      totalHours += time;
-      totalHoursPending = 160.0 - totalHours;
+        // Sumar las horas al total
+        totalHours += time;
+        totalHoursPending = 160.0 - totalHours;
+      });
+
+      // Llamar a la función de dataTable con el nuevo dataSet y el total
+      dataTable(
+        "#taskTables",
+        dataSet,
+        totalHours.toFixed(2),
+        totalHoursPending
+      );
+
+      const meses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      const fecha = new Date();
+      const nombreMes = meses[fecha.getMonth()];
+
+      // Concatenar el mes al título
+      document.title = `Horas Daniel Uribe | ${nombreMes}`;
     });
-
-    // Llamar a la función de dataTable con el nuevo dataSet y el total
-    dataTable('#taskTables', dataSet, totalHours.toFixed(2), totalHoursPending);
-
-    const meses = [
-      'Enero',
-      'Febrero',
-      'Marzo',
-      'Abril',
-      'Mayo',
-      'Junio',
-      'Julio',
-      'Agosto',
-      'Septiembre',
-      'Octubre',
-      'Noviembre',
-      'Diciembre',
-    ];
-    const fecha = new Date();
-    const nombreMes = meses[fecha.getMonth()];
-
-    // Concatenar el mes al título
-    document.title = `Horas Daniel Uribe | ${nombreMes}`;
-  });
 })();
 
 const dataTable = (id, dataSet, total) => {
   $(id).DataTable({
-    dom: 'Bfrtip',
+    dom: "Bfrtip",
     language: {
-      decimal: '',
-      emptyTable: 'No hay datos disponibles en la tabla',
-      info: 'Demostración _START_ en _END_, de _TOTAL_ de mis horas',
-      infoEmpty: 'Showing 0 to 0 of 0 entries',
-      infoFiltered: '(filtrado de _MAX_ total entradas)',
-      infoPostFix: '',
-      thousands: ',',
-      lengthMenu: 'Seleccionar el número de entradas _MENU_',
-      loadingRecords: 'Cargando...',
-      processing: 'Procesando...',
-      search: 'Buscar:',
-      zeroRecords: 'No se encontraron registros coincidentes',
+      decimal: "",
+      emptyTable: "No hay datos disponibles en la tabla",
+      info: "Demostración _START_ en _END_, de _TOTAL_ de mis horas",
+      infoEmpty: "Showing 0 to 0 of 0 entries",
+      infoFiltered: "(filtrado de _MAX_ total entradas)",
+      infoPostFix: "",
+      thousands: ",",
+      lengthMenu: "Seleccionar el número de entradas _MENU_",
+      loadingRecords: "Cargando...",
+      processing: "Procesando...",
+      search: "Buscar:",
+      zeroRecords: "No se encontraron registros coincidentes",
       paginate: {
-        first: 'Primero',
-        last: 'Último',
-        next: 'Siguiente',
-        previous: 'Anterior',
+        first: "Primero",
+        last: "Último",
+        next: "Siguiente",
+        previous: "Anterior",
       },
       aria: {
-        sortAscending: ': activar para ordenar la columna ascendente',
-        sortDescending: ': activar para ordenar la columna descendente',
+        sortAscending: ": activar para ordenar la columna ascendente",
+        sortDescending: ": activar para ordenar la columna descendente",
       },
     },
-    dom: 'lBfrtip',
+    dom: "lBfrtip",
     buttons: [
       // {
       //   extend: 'print',
@@ -108,14 +116,14 @@ const dataTable = (id, dataSet, total) => {
       //   },
       // },
       {
-        extend: 'csvHtml5',
+        extend: "csvHtml5",
         text: '<i class="fas fa-file-csv"></i>',
-        titleAttr: 'Exportar a CSV',
-        charset: 'UTF-16LE',
+        titleAttr: "Exportar a CSV",
+        charset: "UTF-16LE",
         bom: true,
         autoFilter: false,
         exportOptions: {
-          columns: ':visible',
+          columns: ":visible",
         },
         customize: function (output, config, rows) {
           // Agregar la fila de total al contenido de CSV
@@ -142,31 +150,31 @@ const dataTable = (id, dataSet, total) => {
       //   },
       // },
       {
-        extend: 'colvis',
+        extend: "colvis",
         text: '<i class="fas fa-columns"> </i>',
-        titleAttr: 'Visibilidad de las columnas',
+        titleAttr: "Visibilidad de las columnas",
       },
     ],
     lengthMenu: [
       [10, 20, 30, 50, -1],
-      [10, 20, 30, 50, 'Todos'],
+      [10, 20, 30, 50, "Todos"],
     ],
     data: dataSet,
     columns: [
       {
-        title: 'Proyecto',
+        title: "Proyecto",
       },
       {
-        title: 'Tareas',
+        title: "Tareas",
       },
       {
-        title: 'Horas y minutos',
+        title: "Horas y minutos",
       },
       {
-        title: 'Mes',
+        title: "Mes",
       },
       {
-        title: 'Fecha',
+        title: "Fecha",
       },
     ],
   });
